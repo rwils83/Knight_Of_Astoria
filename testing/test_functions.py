@@ -1,8 +1,9 @@
 import json
 from Items import items as i
 import os
+
+
 def test_enemy_info():
-    test = {}
     dirname = os.path.dirname(__file__)
     file = os.path.join(dirname, '../Enemy/enemies_info.json')
     with open(file, "r") as f:
