@@ -1,0 +1,5 @@
+{
+  "Werewolves": {"Resistance": "Iron", "Weakness": "Silver"},
+  "Ogres":{"Resistance": "Gold", "Weakness":"Iron"},
+  "Dragons":{"Resistance": "Silver", "Weakness": "Gold"},
+  "Trolls":{"Resistance": "Water", "Weakness": "Fire"}}

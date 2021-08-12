@@ -1,17 +1,31 @@
 import json
 from gameplay import gameactions as g
-from main import Player, get_player_name, get_player_class
+from gameplay.player import Player, get_player_name, get_player_class
 
 class Menu():
     def __init__(self, text):
         self.text = text
 
     def create_menu(self):
-        print(self.text)
+        return self.text
 
     def get_menu_selection(self):
         selection = input("")
+        return selection
 
+
+class ArmoryMenu(Menu):
+    """
+    Sells Weapons and Armor
+    """
+    def __init__(self):
+        self.text = """
+This is the Armory
+"""
+        super().__init__(self.text)
+
+    def return_menu(self):
+        selection = self.get_menu_selection()
         if selection == "1":
             newgame = g.GameAction("load").load_game()
         if selection == "2":
@@ -30,31 +44,67 @@ class Menu():
         else:
             return "loop"
 
-class Armory(Menu):
-    """
-    Sells Weapson and Armor
-    """
-    def __init__(self):
-        self.type = "Shop"
-        super().__init__(self.type)
-
-
-class GeneralShop(Menu):
+class GeneralShopMenu(Menu):
     """
     Sells food (Regenerate Health) and potions for Health
     """
     def __init__(self):
         self.type = "General Shop"
-        super().__init__(self.type)
+        self.text = """
+This is the General Store
+        """
+        super().__init__(self.text)
 
+    def return_menu(self):
+        selection = self.get_menu_selection()
+        if selection == "1":
+            newgame = g.GameAction("load").load_game()
+        if selection == "2":
+            newgame = g.NewGame(Player(get_player_name(), get_player_class()))
+        if selection == "3":
+            GameInfo().create_menu()
+            newgame = None
+        if selection == "4":
+            print(f"See you next time")
+            exit()
+        if selection == "5":
+            MainMenu().create_menu()
+            newgame = None
+        if newgame is not None:
+            return newgame
+        else:
+            return "loop"
 
-class Apothecary(Menu):
+class ApothecaryMenu(Menu):
     """
     Sells Spells, ingredients for spells, potions for regenerating and increasing magic
     """
     def __init__(self):
+        self.text = """
+This is the Apothecary
+        """
 
-        super().__init__()
+        super().__init__(self.text)
+
+    def return_menu(self):
+        selection = self.get_menu_selection()
+        if selection == "1":
+            newgame = g.GameAction("load").load_game()
+        if selection == "2":
+            newgame = g.NewGame(Player(get_player_name(), get_player_class()))
+        if selection == "3":
+            GameInfo().create_menu()
+            newgame = None
+        if selection == "4":
+            print(f"See you next time")
+            exit()
+        if selection == "5":
+            MainMenu().create_menu()
+            newgame = None
+        if newgame is not None:
+            return newgame
+        else:
+            return "loop"
 
 
 class GameMenu(Menu):
@@ -80,6 +130,26 @@ Would you like to:
 4. Exit
         """
         super().__init__(self.text)
+
+    def return_menu(self):
+        selection = self.get_menu_selection()
+        if selection == "1":
+            newgame = g.GameAction("load").load_game()
+        if selection == "2":
+            newgame = g.NewGame(Player(get_player_name(), get_player_class()))
+        if selection == "3":
+            GameInfo().create_menu()
+            newgame = None
+        if selection == "4":
+            print(f"See you next time")
+            exit()
+        if selection == "5":
+            MainMenu().create_menu()
+            newgame = None
+        if newgame is not None:
+            return newgame
+        else:
+            return "loop"
 
 class GameInfo(Menu):
     """

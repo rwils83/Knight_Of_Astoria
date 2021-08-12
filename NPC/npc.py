@@ -10,11 +10,14 @@ class NPC:
             return False
 
 class Merchant(NPC):
-    def __init__(self, mission, level):
+    def __init__(self, mission,level, items_for_sale):
         super().__init__(mission, level)
+        self.items = items_for_sale
 
     def sell_items(self):
-        pass
+        print("I have the following Items for sale")
+        for i in self.items:
+            print(i)
 
     def buy_items(self):
         pass

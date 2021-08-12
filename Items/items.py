@@ -1,3 +1,6 @@
+import json
+
+
 class Item:
     def __init__(self, weight, cost, quality, equipped, name):
         self.weight = weight
@@ -6,17 +9,8 @@ class Item:
         self.equipped = equipped
         self.name = name
 
-    def add(self):
-        pass
-
-    def remove(self):
-        pass
-
-    def degrade(self):
-        pass
-
-    def return_inventory_stats(self):
-        return f'{self.name} Stats: Quality: {self.quality} Weight:{self.weight} Cost:{self.cost} Equipped:{self.equipped}'
+    def return_item_stats(self):
+        return f'You found: {self.name} with the following stats: Quality: {self.quality} Weight:{self.weight} Cost:{self.cost} Equipped:{self.equipped}'
 
 
 class Spells(Item):
@@ -29,9 +23,9 @@ class Spells(Item):
 
 
 class Armor(Item):
-    def __init__(self, protection, weight, cost, quality, equipped):
+    def __init__(self, protection, weight, cost, quality, equipped, name):
         self.protection = protection
-        super().__init__(weight, cost, quality, equipped)
+        super().__init__(weight, cost, quality, equipped, name)
         self.type = "Armor"
 
     def return_stats(self):
@@ -43,3 +37,18 @@ class Weapon(Item):
         self.damage = damage
         self.type = "Weapon"
         super().__init__(weight, cost, quality, equipped, name)
+
+
+class Book(Item):
+    def __init__(self, topic):
+        self.topic = topic
+        self.topics = {}
+        with open("Enemy\enemies_info.json", "r") as f:
+            self.topics = json.load(f)
+
+    def learn_info(self):
+        if self.topic in self.topics:
+            print(f'You learned about {self.topic}. '
+                  f'You now know that {self.topic} are resistant to '
+                  f'{self.topics[self.topic]["Resistance"]} '
+                  f'and their weakness is {self.topics[self.topic]["Weakness"]}')
