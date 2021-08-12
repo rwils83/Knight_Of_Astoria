@@ -1,0 +1,7 @@
+You are a blah. You are also a blah
+Time to See the new blah
+Go:
+1. East
+2. West
+3. North
+4. South
